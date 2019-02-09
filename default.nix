@@ -254,8 +254,8 @@ in rec {
       mkdir $out
       set -eux
       ln -s "${haskellLib.justStaticExecutables backend}"/bin/* $out/
-      ln -s "${mkAssets assets}" $out/static.assets
-      ln -s ${mkAssets (compressedJs frontend optimizationLevel)} $out/frontend.jsexe.assets
+      ln -s "${assets}" $out/static
+      ln -s ${compressedJs frontend} $out/frontend.jsexe
       echo ${version} > $out/version
     '';
 
