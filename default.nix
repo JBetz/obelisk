@@ -206,8 +206,18 @@ in rec {
           forceSSL = enableHttps;
           locations.${baseUrl} = {
             proxyPass = "http://localhost:" + toString internalPort;
+            proxyWebsockets = true;
           };
         };
+      };
+      services.postgresql = {
+        enable = true;
+        port = 5432;
+        enableTCPIP = true;
+        authentication = pkgs.lib.mkOverride 10 ''
+          local all all trust
+          host all all ::1/128 trust
+        '';
       };
       systemd.services.${name} = {
         wantedBy = [ "multi-user.target" ];
