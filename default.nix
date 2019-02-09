@@ -255,7 +255,7 @@ in rec {
       set -eux
       ln -s "${haskellLib.justStaticExecutables backend}"/bin/* $out/
       ln -s "${assets}" $out/static
-      ln -s ${compressedJs frontend} $out/frontend.jsexe
+      ln -s ${compressedJs frontend optimizationLevel} $out/frontend.jsexe
       echo ${version} > $out/version
     '';
 
