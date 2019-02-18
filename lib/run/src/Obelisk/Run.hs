@@ -85,7 +85,7 @@ run port serveStaticAsset backend frontend = do
                 InL backendRoute :=> Identity a -> serveRoute $ backendRoute :/ a
                 InR obeliskRoute :=> Identity a ->
                   serveDefaultObeliskApp (mkRouteToUrl validFullEncoder) serveStaticAsset frontend $ obeliskRoute :/ a
-      let conf = defRunConfig { _runConfig_redirectPort = port }
+      let conf = defRunConfig { _runConfig_redirectPort = 3001 }
       runWidget conf frontend validFullEncoder `finally` killThread backendTid
 
 -- Convenience wrapper to handle path segments for 'Snap.serveAsset'
